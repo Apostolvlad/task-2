@@ -149,20 +149,6 @@ def block4_main_geo_1_2345(name_block = 'block4'):
                 base_levels.update({main_info['url']:(main_info, base[1])})
     fill_block(list(filter(lambda x: x[0], map(list, base_levels.values()))), name_block)
     return 
-    # если сработает всё ок можно удалять
-    for main_info, childs in base_levels.values():
-        if main_info is None: continue
-        random.shuffle(childs)
-        childs = sorted(childs, key=lambda info: info['online_inlinks']['all_links'])
-        for child_info in childs:
-            try:
-                add_info_in_block(main_info, child_info, name_block)
-            except MainConstError:
-                break
-            except ChildConstError:
-                pass
-            except TagUrlError:
-                pass
 
 def block4_geo_1234_1234(name_block = 'block4'):
     base = dict()

@@ -2,7 +2,8 @@
 class MainConstError(Exception):pass
 class ChildConstError(Exception):pass
 
-def check_const(info, name_block, const_name = 'outlinks', name = 'main'): return not (info[f'online_{const_name}']['all_links'] < info[f'const_{const_name}']['all_links'] and info[f'online_{const_name}'][name_block][name] < info[f'const_{const_name}'][name_block][name])
+def check_const(info, name_block, const_name = 'outlinks', name = 'main'): 
+    return not (info[f'online_{const_name}']['all_links'] < info[f'const_{const_name}']['all_links'] and info[f'online_{const_name}'][name_block][name] < info[f'const_{const_name}'][name_block][name])
 
 def up_online(main_info, child_info, name_block):
     geo1 = main_info['GEO']['is'] 
@@ -20,8 +21,7 @@ def up_online(main_info, child_info, name_block):
         name1 = 'geo'
         name2 = 'geo'
     if check_const(main_info, name_block, const_name='outlinks', name = name1): raise MainConstError()
-    if check_const(child_info, name_block, const_name='inlinks', name = name2): 
-        raise ChildConstError() 
+    if check_const(child_info, name_block, const_name='inlinks', name = name2): raise ChildConstError() 
     main_info['online_outlinks']['all_links'] += 1
     main_info['online_outlinks'][name_block][name1] += 1
     child_info['online_inlinks']['all_links'] += 1
